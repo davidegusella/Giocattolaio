@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Vendita 
+public class Vendita extends RegistroVendite
 {
    public ArrayList<Cliente> cliente;
    public ArrayList<Giocattolo> giocattolo;
@@ -41,6 +41,58 @@ public class Vendita
       for (Cliente c : cliente) 
       {
          System.out.println("ID: " + c.getId() + " Nome: " + c.getNome() + " Email: " + c.getEmail());
+      }
+   }
+
+   /**
+    * Metodo in grado di registrare un nuovo giocattolo
+    */
+   public void registraGiocattolo() 
+   {
+      System.out.print("Inserisci il Nome del Giocattolo: ");
+      String nomeGiocattolo = input.next();
+
+      System.out.print("Inserisci il Prezzo del Giocattolo: ");
+      double PrezzoCliente = input.nextDouble();
+
+      System.out.print("Inserisci il Età consigliata del Giocattolo: ");
+      int etaConsigliata = input.nextInt();
+
+      // Nuovo Giocattolo
+      Giocattolo g = new Giocattolo(giocattolo.size() + 1, nomeGiocattolo, PrezzoCliente, etaConsigliata);
+      
+      // Registrazione nuovo Giocattolo
+      giocattolo.add(g);
+   }
+
+   /**
+    * Metodo in grado di visualizzare i clienti registrati
+    */
+   public void visualizzaGiocattoliDisponibili() 
+   {
+      System.out.println("Elenco giocattoli disponibili:");
+      for (Giocattolo g : giocattolo) 
+      {
+         System.out.println("ID: " + g.getId() + " Nome: " + g.getNome() + " Prezzo: " + g.getPrezzo() + " Età consigliata: " + g.getEtaConsigliata());
+      }
+   }
+
+   /**
+    * Metodo in grado di vendere un giocattolo
+    */
+   @Override
+   public void VendiGiocattolo()
+   {
+      System.out.println("Inserisci l'id del giocattolo da vendere: ");
+      int idGiocattolo = input.nextInt();
+
+      // Eliminazione giocattolo
+      for(int i = 0; i < giocattolo.size(); i++)
+      {
+         if(giocattolo.get(i).getId() == idGiocattolo)
+         {
+            giocattolo.remove(i);
+         }
       }
    }
 }

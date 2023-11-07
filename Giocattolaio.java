@@ -39,6 +39,30 @@ class Giocattolaio
 
       // Visualizzazione Clienti Registrati
       vendita.visualizzaClientiRegistrati();
+
+      // Se l'utente ha il permesso può registrare un giocattolo
+      // (Esempio: Il cliente con id 1 ha il permesso di registrare un giocattolo)
+      if(cliente.get(0).getId() == 1)
+      {
+         // Registrazione Giocattolo 1
+         vendita.registraGiocattolo();
+
+         // Registrazione Giocattolo 2
+         vendita.registraGiocattolo();
+
+         // Visualizzazione Giocattoli disponibili
+         vendita.visualizzaGiocattoliDisponibili();
+
+         // Vendita Giocattolo
+         vendita.VendiGiocattolo();
+
+         // Visualizzazione Giocattoli disponibili dopo l'eliminaizione
+         vendita.visualizzaGiocattoliDisponibili();
+      }
+      else
+      {
+         System.out.println("Non hai i permessi");
+      }
    }
 }
 
