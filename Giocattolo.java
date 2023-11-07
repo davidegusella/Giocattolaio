@@ -1,10 +1,12 @@
 public class Giocattolo 
 {
+   // Attributi
    private int id;
    private String nome;
    private double prezzo;
    private int etaConsigliata;
 
+   // Costruttore
    public Giocattolo(int id, String nome, double prezzo, int etaConsigliata) 
    {
       this.id = id;

@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Vendita extends RegistroVendite
+public class Vendita
 {
+   // Attributi
    public ArrayList<Cliente> cliente;
    public ArrayList<Giocattolo> giocattolo;
    Scanner input;
 
+   // Costruttore
    Vendita(ArrayList<Cliente> cliente, ArrayList<Giocattolo> giocattolo) 
    {
       this.cliente = cliente;
@@ -17,19 +19,27 @@ public class Vendita extends RegistroVendite
    /**
     * Metodo in grado di registrare un nuovo cliente
     */
-   public void registraCliente() 
+   public boolean registraCliente() 
    {
+      // Inizializzazione pessimistica
+      boolean ris = false;
+
       System.out.print("Inserisci il Nome del Cliente: ");
-      String nomeCliente = input.nextLine();
+      String nomeCliente = input.next();
 
       System.out.print("Inserisci l'Email del Cliente: ");
-      String emailCliente = input.nextLine();
+      String emailCliente = input.next();
 
       // Nuovo cliente
       Cliente c = new Cliente(cliente.size() + 1, nomeCliente, emailCliente);
       
       // Registrazione nuovo utente
       cliente.add(c);
+
+      // Aggiorno il flag
+      ris = true;
+
+      return ris;
    }
 
    /**
@@ -42,57 +52,31 @@ public class Vendita extends RegistroVendite
       {
          System.out.println("ID: " + c.getId() + " Nome: " + c.getNome() + " Email: " + c.getEmail());
       }
+      System.out.println();
    }
 
    /**
-    * Metodo in grado di registrare un nuovo giocattolo
+    * Metodo in grado di controllare se un cliente è registrato
     */
-   public void registraGiocattolo() 
+   public boolean checkCliente()
    {
-      System.out.print("Inserisci il Nome del Giocattolo: ");
-      String nomeGiocattolo = input.next();
+      visualizzaClientiRegistrati();
 
-      System.out.print("Inserisci il Prezzo del Giocattolo: ");
-      double PrezzoCliente = input.nextDouble();
+      System.out.print("Inserisci l'id del cliente: ");
+      int idCliente = input.nextInt();
 
-      System.out.print("Inserisci il Età consigliata del Giocattolo: ");
-      int etaConsigliata = input.nextInt();
-
-      // Nuovo Giocattolo
-      Giocattolo g = new Giocattolo(giocattolo.size() + 1, nomeGiocattolo, PrezzoCliente, etaConsigliata);
-      
-      // Registrazione nuovo Giocattolo
-      giocattolo.add(g);
-   }
-
-   /**
-    * Metodo in grado di visualizzare i clienti registrati
-    */
-   public void visualizzaGiocattoliDisponibili() 
-   {
-      System.out.println("Elenco giocattoli disponibili:");
-      for (Giocattolo g : giocattolo) 
+      // Controllo se l'id inserito è presente
+      boolean flag = false;
+      for(int i = 0; i < cliente.size(); i++)
       {
-         System.out.println("ID: " + g.getId() + " Nome: " + g.getNome() + " Prezzo: " + g.getPrezzo() + " Età consigliata: " + g.getEtaConsigliata());
-      }
-   }
-
-   /**
-    * Metodo in grado di vendere un giocattolo
-    */
-   @Override
-   public void VendiGiocattolo()
-   {
-      System.out.println("Inserisci l'id del giocattolo da vendere: ");
-      int idGiocattolo = input.nextInt();
-
-      // Eliminazione giocattolo
-      for(int i = 0; i < giocattolo.size(); i++)
-      {
-         if(giocattolo.get(i).getId() == idGiocattolo)
+         // Suppongo che il cliente "Admin" sia colui che abbia id = 1
+         if(cliente.get(i).getId() == idCliente && cliente.get(i).getId() == 1) 
          {
-            giocattolo.remove(i);
+            // Aggiorno il flag
+            flag = true;
          }
       }
+
+      return flag;
    }
 }

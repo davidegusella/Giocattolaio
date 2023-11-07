@@ -1,9 +1,11 @@
 public class Cliente 
 {
+   // Attributi
    private int id;
    private String nome;
    private String email;
 
+   // Costruttore
    public Cliente(int id, String nome, String email) 
    {
       this.id = id;

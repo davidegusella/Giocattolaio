@@ -20,49 +20,119 @@ Definizione delle Classi:
 */
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class Giocattolaio 
 {
    public static void main(String[] args) 
    {
-      // ArrayList di Cliente e Giocattolo
+      // Istanza struttura dati Clienti e Giocattolo
       ArrayList<Cliente> cliente = new ArrayList<Cliente>();
       ArrayList<Giocattolo> giocattolo = new ArrayList<Giocattolo>();
 
+      // Istanza oggetti gestione vendita e inventario
       Vendita vendita = new Vendita(cliente, giocattolo);
+      Inventario inventario = new Inventario(giocattolo);
 
-      // Registrazione Cliente 1
-      vendita.registraCliente();
+      // Istanza oggetto input
+      Scanner input = new Scanner(System.in);
 
-      // Registrazione Cliente 2
-      vendita.registraCliente();
-
-      // Visualizzazione Clienti Registrati
-      vendita.visualizzaClientiRegistrati();
-
-      // Se l'utente ha il permesso può registrare un giocattolo
-      // (Esempio: Il cliente con id 1 ha il permesso di registrare un giocattolo)
-      if(cliente.get(0).getId() == 1)
+      // Menu
+      int scelta = 0;
+      do
       {
-         // Registrazione Giocattolo 1
-         vendita.registraGiocattolo();
+         System.out.println();
+         System.out.println("Menu Principale:");
+         System.out.println("1. Registrazione Nuovo Cliente");
+         System.out.println("2. Visualizzazione clienti registrati");
+         System.out.println("3. Registrazione Nuovo Giocattolo");
+         System.out.println("4. Visualizzazione giocattoli disponibili");
+         System.out.println("5. Vendi Giocattolo");
+         System.out.println("6. Esci");
 
-         // Registrazione Giocattolo 2
-         vendita.registraGiocattolo();
+         // Inserimento scelta
+         System.out.print("Inserisci la tua scelta: ");
+         scelta = input.nextInt();
 
-         // Visualizzazione Giocattoli disponibili
-         vendita.visualizzaGiocattoliDisponibili();
+         // Appoggio per controllare il risultato delle funzioni
+         boolean flag = false;
 
-         // Vendita Giocattolo
-         vendita.VendiGiocattolo();
+         // Esegue l'azione corrispondente alla scelta
+         switch (scelta) 
+         {
+            case 1:
+                  flag = vendita.registraCliente();
+                  if(flag)
+                  {
+                     System.out.println("Registrazione effettuata con successo.");
+                  }
+                  else
+                  {
+                     System.out.println("Registrazione non effettuata.");
+                  }
+               break;
 
-         // Visualizzazione Giocattoli disponibili dopo l'eliminaizione
-         vendita.visualizzaGiocattoliDisponibili();
-      }
-      else
-      {
-         System.out.println("Non hai i permessi");
-      }
+            case 2:
+                  vendita.visualizzaClientiRegistrati();
+               break;
+
+            case 3:
+                  flag = vendita.checkCliente();
+                  if(flag)
+                  {
+                     flag = inventario.registraGiocattolo();
+                     if(flag)
+                     {
+                        System.out.println("Registrazione effettuata con successo.");
+                     }
+                     else
+                     {
+                        System.out.println("Registrazione non effettuata.");
+                     }     
+                  }
+                  else
+                  {
+                     System.out.println("Utente non Admin oppure Utente NON esistente.");
+                  }
+               break;
+
+            case 4:
+                  flag = vendita.checkCliente();
+                  if(flag)
+                  {
+                     inventario.visualizzaGiocattoliDisponibili();
+                  }
+                  else
+                  {
+                     System.out.println("Utente non Admin oppure Utente NON esistente.");
+                  }
+               break;
+
+            case 5:
+                  flag = vendita.checkCliente();
+                  if(flag)
+                  {
+                     flag = inventario.vendiGiocattolo();
+                     if(flag)
+                     {
+                        System.out.println("Vendita effettuata con successo.");
+                     }
+                     else
+                     {
+                        System.out.println("Id Giocattolo inesistente.");
+                     }
+                  }
+                  else
+                  {
+                     System.out.println("Utente non Admin oppure Utente NON esistente.");
+                  }
+               break;
+
+            default:
+                  System.out.println("Scelta non valida.");
+         }
+
+      }while(scelta != 6);
    }
 }
 
