@@ -29,6 +29,7 @@ class Giocattolaio
       // Istanza struttura dati Clienti e Giocattolo
       ArrayList<Cliente> cliente = new ArrayList<Cliente>();
       ArrayList<Giocattolo> giocattolo = new ArrayList<Giocattolo>();
+      System.out.println("Hello Brach Main");
 
       // Istanza oggetti gestione vendita e inventario
       Vendita vendita = new Vendita(cliente, giocattolo);
