@@ -19,17 +19,19 @@ Definizione delle Classi:
       permettendo loro di acquistare giocattoli e visualizzare le vendite.
 */
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 class Giocattolaio 
 {
-   public static void main(String[] args) 
+   public static void main(String[] args)
    {
+      ConnessioneDB connessioneDB = new ConnessioneDB();
+
       // Istanza struttura dati Clienti e Giocattolo
       ArrayList<Cliente> cliente = new ArrayList<Cliente>();
       ArrayList<Giocattolo> giocattolo = new ArrayList<Giocattolo>();
-      System.out.println("Hello Brach Main");
 
       // Istanza oggetti gestione vendita e inventario
       Vendita vendita = new Vendita(cliente, giocattolo);
