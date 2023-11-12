@@ -18,7 +18,6 @@ Definizione delle Classi:
    Crea un'interfaccia utente semplice in console per interagire con l'utente, 
       permettendo loro di acquistare giocattoli e visualizzare le vendite.
 */
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,6 +27,7 @@ class Giocattolaio
    public static void main(String[] args)
    {
       ConnessioneDB connessioneDB = new ConnessioneDB();
+      connessioneDB.letturaDati();
 
       // Istanza struttura dati Clienti e Giocattolo
       ArrayList<Cliente> cliente = new ArrayList<Cliente>();
